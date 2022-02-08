@@ -5,9 +5,9 @@
 {% block content %}
     <h2>Do you know at least 1 of the following?</h2>
         <form action='/search' method="post">
-            <input autocomplete="off" autofocus name="isbn" placeholder="ISBN" type="text" />
-            <input autocomplete="off" autofocus name="title" placeholder="Title" type="text" />
-            <input autocomplete="off" autofocus name="author" placeholder="Author" type="text" />
+            <input autofocus name="isbn" placeholder="ISBN" type="text" />
+            <input autofocus name="title" placeholder="Title" type="text" />
+            <input autofocus name="author" placeholder="Author" type="text" />
             <input type="submit" value="Search">
         </form>
     {% if books|length > 0 %}
