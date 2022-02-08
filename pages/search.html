@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %} Search Page {% endblock %}
+
+{% block content %}
+    <h2>Do you know at least 1 of the following?</h2>
+        <form action='/search' method="post">
+            <input autocomplete="off" autofocus name="isbn" placeholder="ISBN" type="text" />
+            <input autocomplete="off" autofocus name="title" placeholder="Title" type="text" />
+            <input autocomplete="off" autofocus name="author" placeholder="Author" type="text" />
+            <input type="submit" value="Search">
+        </form>
+    {% if books|length > 0 %}
+        <h1>Book List</h1>
+        <table>
+                <thead>
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>{{book.isbn}}</td>
+                            <td>{{book.title}}</td>
+                            <td>{{book.author}}</td>
+                            <td>{{book.year}}</td>
+                            <td>
+                                <form action="/book" method="post">
+                                    <input name="isbn" type="hidden" value="{{ book.isbn }}">
+                                    <input name="title" type="hidden" value="{{ book.title }}">
+                                    <input name="author" type="hidden" value="{{ book.author }}">
+                                    <input name="year" type="hidden" value="{{ book.year }}">
+                                    <input type="submit" value="View Details">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    {% else %}
+        <h2>No books found under that search criteria</h2>
+    {% endif %}
+
+{% endblock %}

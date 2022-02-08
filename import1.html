@@ -1,0 +1,8 @@
+import pandas as pd
+from cs50 import SQL
+db = SQL("postgresql://jnjdrxzaynywqi:2a28da550040edb766c39a4353ea19ef824727e680a1a20e65628799e6f45032@ec2-54-224-64-114.compute-1.amazonaws.com:5432/d1aud2alpnntff")
+df = pd.read_csv("books.csv")
+for index, row in df.iterrows():
+    db.execute("INSERT INTO library (isbn, title, author, year) \
+                VALUES (?, ?, ?, ?)", row.isbn, row.title, row.author, row.year)
+db.commit() 

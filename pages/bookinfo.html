@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Info on your book: {{book.title}}{% endblock %}
+{% endblock %}
+{% block content %}
+        <table>
+            <tbody>
+                <tr>
+                    <td>ISBN:</td>
+                    <td>{{book.isbn}}</td>
+                </tr>
+                <tr>
+                    <td>Title:</td>
+                    <td>{{book.title}}</td>
+                </tr>
+                <tr>
+                    <td>Author:</td>
+                    <td>{{book.author}}</td>
+                </tr>
+                <tr>
+                    <td>Year:</td>
+                    <td>{{book.year}}</td>
+                </tr>
+                <tr>
+                <td>Average Ratings via Google [out of 5]:</td>
+                    <td>{{book.average_Rating}}</td>
+                </tr>
+                <tr>
+                <td>Number of Ratings:</td>
+                    <td>{{book.ratings_total}}</td>
+                </tr>
+                </tbody>
+            </table>
+<br>
+<h1>Submit a Review</h1>
+    <form action="/review" method="post" id="review_form">
+        <input name="isbn" type="hidden" value="{{ book.isbn }}">
+         <select name="rating">
+            <option disable selected>Rating</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+        <textarea rows="5" cols="40" name="review" form="review_form">
+Enter your review here</textarea>
+        <input type="submit" value="Submit Review" />
+    </form>
+<br>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rating [0-5]</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+                <tr>
+                    <td>{{review.name}}</td>
+                    <td>{{review.rating}}</td>
+                    <td>{{review.review}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %} 
